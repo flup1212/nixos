@@ -1,5 +1,5 @@
 { config, pkgs, ... }: {
-    networking.hostName = "surfacepro8"; # Define your hostname.
+    networking.hostName = "nixos"; # Define your hostname.
     # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
     # Configure network proxy if necessary
@@ -31,6 +31,10 @@
     services.xserver.xkb = {
       layout = "us";
       variant = "";
+    };
+
+    xdg.mime.defaultApplications = {                                                                                 
+	"inode/directory" = [ "thunar.desktop" ];                                                                    
     };
 
     hardware.graphics.enable = true;

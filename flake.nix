@@ -12,10 +12,9 @@
     };
 
     outputs = { self, nixpkgs, nixos-hardware, home-manager, ... }@inputs: {
-	nixosConfigurations.surfacepro8 = nixpkgs.lib.nixosSystem {
+	nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
 	    modules = [
 		./system/core.nix
-		nixos-hardware.nixosModules.microsoft-surface-common
 
 		home-manager.nixosModules.default
 		{

@@ -1,11 +1,10 @@
-// This config is in the KDL format: https://kdl.dev
-// "/-" comments out the following node.
-// Check the wiki for a full description of the configuration:
-// https://niri-wm.github.io/niri/Configuration:-Introduction
 
-// Input device configuration.
-// Find the full list of options on the wiki:
-// https://niri-wm.github.io/niri/Configuration:-Input
+// ------------
+// 
+//    Inputs
+//
+// ------------
+
 input {
     keyboard {
         xkb {
@@ -61,16 +60,6 @@ input {
         // scroll-button-lock
         // middle-emulation
     }
-    
-    tablet {
-        map-to-output "eDP-1"
-    }
-
-    touch {
-        // off
-        map-to-output "eDP-1"
-        // calibration-matrix 1.0 0.0 0.0 0.0 1.0 0.0
-    }
 
     // Uncomment this to make the mouse warp to the center of newly focused windows.
     warp-mouse-to-focus
@@ -80,89 +69,13 @@ input {
     focus-follows-mouse max-scroll-amount="25%"
 }
 
-gestures {
-    // Dots that follow the fingers on screen (demos, debugging).
-    // "gestures": only while a multi-finger gesture is down. "all": every
-    // finger. Remove the line to disable.
-    show-touch-points "all"
+// -------------
+// 
+//    Outputs
+//
+// -------------
 
-    // Per-event gesture logging for bug reports ("gesture-debug:" lines,
-    // info level, applies live from the next touch). Uncomment to enable.
-    // debug-log
-
-    // Multi-finger gestures: the two animated drags, taps, flicks, hold-swipes.
-    touchscreen-swipe {
-        // Base finger count for everything in this block that has no "more"
-        // in its name (the drags and `tap`): 3 or 4. The *-more nodes below
-        // override their gesture at one finger more than this (4 by default).
-        fingers 3
-
-        // What the horizontal drag does: "resize-column" widens/narrows the
-        // focused window, tracking the fingers 1:1; the default "move-view"
-        // scrolls the view across columns instead.
-        horizontal-swipe "resize-column"
-
-        // The discrete gestures (taps, flicks) fire once, on finger lift.
-        tap             { maximize-column; }                    // maximize / restore
-        tap-more        { spawn-sh "~/.local/bin/niri-osk.sh"; }                    // niri's own overview
-        swipe-more-down { close-window; }
-        swipe-more-up   { fullscreen-window; }                  // fullscreen on/off
-
-        // Extra-finger horizontal flicks, unbound by default: uncommented
-        // they leave those flicks on the horizontal drag above (resize or
-        // move-view). Examples:
-        // swipe-more-left { focus-column-left; }
-        // swipe-more-right { focus-column-right; }
-
-        // Prefer an app launcher on the extra-finger tap? Comment out the
-        // toggle-overview line above and uncomment ONE of these (or write
-        // your own spawn):
-        // tap-more { spawn-sh "noctalia msg panel-toggle launcher"; }  // Noctalia
-        // tap-more { spawn "fuzzel"; }                                 // fuzzel
-        // tap-more { spawn "wofi" "--show" "drun"; }                   // wofi
-        // tap-more { spawn "rofi" "-show" "drun"; }                    // rofi
-
-        // Press, hold ~400ms, then swipe: moves the focused window (left or
-        // right a column, up or down a workspace) instead of the animated
-        // drag. Quick swipes never trigger it.
-        hold {
-            left { move-column-left; }
-            right { move-column-right; }
-            up { move-window-to-workspace-up; }
-            down { move-window-to-workspace-down; }
-        }
-    }
-
-    // One finger swiping inward from a screen edge. Taps and short drags in
-    // the strip still reach apps. Don't bind an edge covered by a
-    // swipe-driven panel (e.g. a notification pull-down): it would fire
-    // mid-drag.
-    touchscreen-edge-swipe {
-        bottom { spawn-sh "pkill wofi || wofi --show drun"; }
-        top { toggle-overview; }
-        left { focus-column-left; }
-        right { focus-column-right; }
-    }
-
-    // One finger swiping diagonally inward from a corner. Mostly straight
-    // swipes near a corner do nothing on purpose, so the edges stay usable.
-    // Unbound by default: uncomment to bind a corner.
-    // touchscreen-corner-swipe {
-    //     top-left { maximize-column; }
-    //     top-right { toggle-overview; }
-    //     bottom-left { spawn "foot"; }
-    //     bottom-right { close-window; }
-    // }
-}
-
-
-// You can configure outputs by their name, which you can find
-// by running `niri msg outputs` while inside a niri instance.
-// The built-in laptop monitor is usually called "eDP-1".
-// Find more information on the wiki:
-// https://niri-wm.github.io/niri/Configuration:-Outputs
-// Remember to uncomment the node by removing "/-"!
-output "eDP-1" {
+output "DP-3" {
     // Uncomment this line to disable this output.
     // off
 
@@ -172,10 +85,11 @@ output "eDP-1" {
     // for the resolution.
     // If the mode is omitted altogether or is invalid, niri will pick one automatically.
     // Run `niri msg outputs` while inside a niri instance to list all outputs and their modes.
-    mode "2880x1920@120.000"
+    mode "1920x1080@165.003"
+    focus-at-startup
 
     // You can use integer or fractional scale, for example use 1.5 for 150% scale.
-    scale 2
+    scale 0.9
 
     // Transform allows to rotate the output counter-clockwise, valid values are:
     // normal, 90, 180, 270, flipped, flipped-90, flipped-180 and flipped-270.
@@ -192,10 +106,19 @@ output "eDP-1" {
     // automatically.
     position x=0 y=0
 }
+output "HDMI-A-1" {
+    mode "1920x1080@74.973"
+    scale 0.9
+    transform "normal"
+    position x=2133 y=0
+}
 
-// Settings that influence how windows are positioned and sized.
-// Find more information on the wiki:
-// https://niri-wm.github.io/niri/Configuration:-Layout
+// ------------
+// 
+//    Layout
+//
+// ------------
+
 layout {
     // Set gaps around windows in logical pixels.
     gaps 16
@@ -207,6 +130,8 @@ layout {
     // - "on-overflow", focusing a column will center it if it doesn't fit
     //   together with the previously focused column.
     center-focused-column "never"
+
+    background-color "transparent"
 
     // You can customize the widths that "switch-preset-column-width" (Mod+R) toggles between.
     preset-column-widths {
@@ -354,9 +279,17 @@ layout {
 // which may be more convenient to use.
 // See the binds section below for more spawn examples.
 
-// This line starts waybar, a commonly used bar for Wayland compositors.
+// --------------------------
+// 
+//    Startup applications
+//
+// --------------------------
+
+spawn-at-startup "awww-daemon"
+spawn-sh-at-startup "awww img /home/levi/dotfiles/assets/wallpapers/blurred-wallpaper.png"
+spawn-sh-at-startup "linux-wallpaperengine --screen-root DP-3 --set-property interloper=0 --silent 2984500160"
+spawn-sh-at-startup "linux-wallpaperengine --screen-root HDMI-A-1 --set-property interloper=0 --silent 2984500160"
 spawn-at-startup "waybar"
-spawn-at-startup "awww" "img" "~/.config/nixos/wallpaper"
 
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
 // spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
@@ -381,9 +314,12 @@ screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
 // You can also set this to null to disable saving screenshots to disk.
 // screenshot-path null
 
-// Animation settings.
-// The wiki explains how to configure individual animations:
-// https://niri-wm.github.io/niri/Configuration:-Animations
+// ----------------
+// 
+//    Animations
+//
+// ----------------
+
 animations {
     // Uncomment to turn off all animations.
     // off
@@ -452,15 +388,8 @@ window-rule {
     draw-border-with-background false
     background-effect {
 	blur true
+	xray false
     }
-}
-window-rule {
-    match app-id="vivaldi"
-    scroll-factor 0.07
-}
-window-rule {
-    match app-id="steam"
-    scroll-factor 0.15
 }
 window-rule {
     match is-focused=true
@@ -476,28 +405,66 @@ window-rule {
     // This app-id regular expression will work for both:
     // - host Firefox (app-id is "firefox")
     // - Flatpak Firefox (app-id is "org.mozilla.firefox")
-    match app-id=r#"firefox$"# title="^Picture-in-Picture$"
+    match app-id=r#"vivaldi$"# title="^Picture in Picture$"
     open-floating true
 }
+window-rule {
+    match title="Steam Big Picture Mode"
+    open-fullscreen true
+}
+window-rule {
+    match app-id="com.libretro.RetroArch"
+    open-focused true
+    open-fullscreen true
+}
+window-rule {
+    match app-id="org.pulseaudio.pavucontrol"
 
-// Example: block out two password managers from screen capture.
-// (This example rule is commented out with a "/-" in front.)
-/-window-rule {
-    match app-id=r#"^org\.keepassxc\.KeePassXC$"#
-    match app-id=r#"^org\.gnome\.World\.Secrets$"#
-
-    block-out-from "screen-capture"
-
-    // Use this instead if you want them visible on third-party screenshot tools.
-    // block-out-from "screencast"
+    open-floating true
+    default-column-width { fixed 1000; }
+    default-window-height { fixed 600; }
+    default-floating-position x=4 y=0 relative-to="top-right"
 }
 
 // Example: enable rounded corners for all windows.
-// (This example rule is commented out with a "/-" in front.)
 /-window-rule {
     geometry-corner-radius 12
     clip-to-geometry true
 }
+
+// -----------------
+// 
+//    Layer Rules
+//
+// -----------------
+
+layer-rule {
+    match namespace="awww-daemon"
+    place-within-backdrop true
+    opacity 1.0
+}
+
+// --------------
+// 
+//    Overview
+//
+// --------------
+
+overview {
+    zoom 0.6
+    workspace-shadow {
+	softness 20
+	spread 10
+	offset x=0 y=0
+	color "#00000050"
+    }
+}
+
+// --------------
+// 
+//    Keybinds
+//
+// --------------
 
 binds {
     // Keys consist of modifiers separated by + signs, followed by an XKB key name
@@ -672,6 +639,7 @@ binds {
     Mod+7 { focus-workspace 7; }
     Mod+8 { focus-workspace 8; }
     Mod+9 { focus-workspace 9; }
+    Mod+0 { focus-workspace 10; }
     Mod+Ctrl+1 { move-column-to-workspace 1; }
     Mod+Ctrl+2 { move-column-to-workspace 2; }
     Mod+Ctrl+3 { move-column-to-workspace 3; }
@@ -681,6 +649,7 @@ binds {
     Mod+Ctrl+7 { move-column-to-workspace 7; }
     Mod+Ctrl+8 { move-column-to-workspace 8; }
     Mod+Ctrl+9 { move-column-to-workspace 9; }
+    Mod+Ctrl+0 { move-column-to-workspace 10; }
 
     // Alternatively, there are commands to move just a single window:
     // Mod+Ctrl+1 { move-window-to-workspace 1; }
@@ -757,9 +726,9 @@ binds {
     // Mod+Space       { switch-layout "next"; }
     // Mod+Shift+Space { switch-layout "prev"; }
 
-    Print { screenshot; }
-    Ctrl+Print { screenshot-screen; }
-    Alt+Print { screenshot-window; }
+    Mod+Shift+S { screenshot; }
+    Mod+Shift+Ctrl+S { screenshot-screen; }
+    Mod+Alt+S { screenshot-window; }
 
     // Applications such as remote-desktop clients and software KVM switches may
     // request that niri stops processing the keyboard shortcuts defined here

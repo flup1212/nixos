@@ -1,9 +1,39 @@
 { config, pkgs, ... }: {
     imports = [
 	./packages
-	./hyprland
-	./niri
     ];
+
+    # home config
+    dconf.settings = {
+	"org/gnome/desktop/interface" = {
+	    color-scheme = "prefer-dark";
+    	};
+    };
+
+    gtk = {
+	enable = true;
+      	theme = {
+	    name = "Adwaita-dark";
+	    package = pkgs.gnome-themes-extra;
+      	};
+    };
+
+    qt = {
+	enable = true;
+      	platformTheme.name = "adwaita";
+      	style = {
+	    name = "adwaita-dark";
+	    package = pkgs.gnome-themes-extra;
+      	};
+    };
+
+    home.pointerCursor = {
+	enable = true;
+	gtk.enable = true;
+  	package = pkgs.banana-cursor;
+  	name = "Banana Cursor";
+	size = 20;
+    };
 
     home.username = "levi";
     home.homeDirectory = "/home/levi";

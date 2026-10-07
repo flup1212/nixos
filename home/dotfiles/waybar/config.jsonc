@@ -1,0 +1,236 @@
+// -*- mode: jsonc -*-
+{
+    "layer": "top", // Waybar at top layer
+    "position": "top", // Waybar position (top|bottom|left|right)
+    "height": 35, // Waybar height (to be removed for auto height)
+    //"width": 1920, // Waybar width
+    "spacing": 4, // Gaps between modules (4px)
+    "reload_style_on_change": true,
+    // Choose the order of the modules
+    "modules-left": [
+        "niri/workspaces",
+	"hyprland/workspaces",
+        "niri/window"
+    ],
+    "modules-center": [
+    ],
+    "modules-right": [
+        "mpris",
+        // "idle_inhibitor",
+        "pulseaudio",
+        // "network",
+        // "power-profiles-daemon",
+	"group/hardware",
+        // "backlight",
+        // "keyboard-state",
+        // "battery",
+        // "battery#bat2",
+        "tray",
+        "clock",
+        "group/powermenu"
+    ],
+    "niri/workspaces": {
+        "format": "{icon}",
+        "format-icons": {
+            "1": "1",
+            "2": "2",
+            "3": "3",
+            "4": "4",
+            "5": "5",
+	    "6": "6",
+	    "7": "7",
+	    "8": "8",
+	    "9": "9",
+	    "10": "10",
+            //"focused": "",
+            "default": ""
+        }
+    },
+    "hyprland/workspaces": {
+        "format": "{icon}",
+        "format-icons": {
+            "1": "1",
+            "2": "2",
+            "3": "3",
+            "4": "4",
+            "5": "5",
+	    "6": "6",
+	    "7": "7",
+	    "8": "8",
+	    "9": "9",
+	    "10": "10",
+            //"focused": "",
+            "default": ""
+	}
+    },
+    "niri/window": {
+	"format": "{title}",
+	"expand": true
+    },
+    "keyboard-state": {
+        "numlock": true,
+        "capslock": true,
+        "format": "{name} {icon}",
+        "format-icons": {
+            "locked": "",
+            "unlocked": ""
+        }
+    },
+    "mpris": {
+	"format": "{status} {title} - {artist}",
+	"album-len": 0
+    },
+    "mpd": {
+        "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ⸨{songPosition}|{queueLength}⸩ {volume}% ",
+        "format-disconnected": "Disconnected",
+        "format-stopped": "Nothing Playing",
+        "unknown-tag": "N/A",
+        "interval": 5,
+        "consume-icons": {
+            "on": " "
+        },
+        "random-icons": {
+            "off": "<span color=\"#f53c3c\"></span> ",
+            "on": " "
+        },
+        "repeat-icons": {
+            "on": " "
+        },
+        "single-icons": {
+            "on": "1 "
+        },
+        "state-icons": {
+            "paused": "",
+            "playing": ""
+        },
+        "tooltip-format": "MPD (connected)",
+        "tooltip-format-disconnected": "MPD (disconnected)"
+    },
+    "tray": {
+        // "icon-size": 21,
+        "spacing": 10,
+        "drawer": {
+	    "transition-duration": 500,
+    	    "children-class": "icons",
+    	    "transition-left-to-right": false
+	}
+        // "icons": {
+        //   "blueman": "bluetooth",
+        //   "TelegramDesktop": "$HOME/.local/share/icons/hicolor/16x16/apps/telegram.png"
+        // }
+    },
+    "clock": {
+        // "timezone": "America/New_York",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "format-alt": "{:%Y-%m-%d}"
+    },
+    "group/hardware": {
+	"orientation": "horizontal",
+	"drawer": {
+	    "transition-duration": 500,
+	    "children-class": "hardware-hidden",
+	    "transition-left-to-right": false,
+	    "click-to-reveal": true
+	},
+	"modules": [
+	    "temperature",
+	    "network",
+	    "memory",
+	    "cpu"
+	]
+    },
+    "cpu": {
+        "format": "{usage}% ",
+        "tooltip": false
+    },
+    "memory": {
+        "format": "{}% "
+    },
+    "temperature": {
+        // "thermal-zone": 2,
+        // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
+        "critical-threshold": 80,
+        // "format-critical": "{temperatureC}°C {icon}",
+        "format": "{temperatureC}°C {icon}",
+        "format-icons": ["󰉬", "", "󰉪"]
+    },
+    "network": {
+        // "interface": "wlp2*", // (Optional) To force the use of this interface
+        "format-wifi": "{essid} ({signalStrength}%) ",
+        "format-ethernet": "{ipaddr}/{cidr} 󰊗",
+        "tooltip-format": "{ifname} via {gwaddr} 󰊗",
+        "format-linked": "{ifname} (No IP) 󰊗",
+        "format-disconnected": "Disconnected ⚠",
+        "format-alt": "{ifname}: {ipaddr}/{cidr}"
+    },
+    "pulseaudio": {
+        "scroll-step": 5, // %, can be a float
+        "format": "{volume}% {icon} {format_source}",
+        "format-bluetooth": "{volume}% {icon} {format_source}",
+        "format-bluetooth-muted": "󰅶 {icon} {format_source}",
+        "format-muted": "󰅶 {format_source}",
+        "format-source": "{volume}% ",
+        "format-source-muted": "",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "󰂑",
+            "headset": "󰂑",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""]
+        },
+        "on-click": "pavucontrol"
+    },
+    "custom/media": {
+        "format": "{icon} {text}",
+        "return-type": "json",
+        "max-length": 40,
+        "format-icons": {
+            "spotify": "",
+            "default": "🎜"
+        },
+        "escape": true,
+        "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
+        // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
+    },
+    "group/powermenu": {
+	"orientation": "horizontal",
+	"drawer": {
+	    "transition-duration": 500,
+	    "children-class": "hardware-hidden",
+	    "transition-left-to-right": false
+	},
+	"modules": [
+	    "custom/power",
+	    "custom/suspend",
+	    "custom/hibernate",
+	    "custom/reboot",
+	    "custom/shutdown"
+	]
+    },
+    "custom/power": {
+        "format": "⏻ ",
+	"tooltip": false
+    },
+    "custom/shutdown": {
+	"format": "Shutdown",
+	"tooltip": false,
+	"on-click": "systemctl poweroff"
+    },
+    "custom/reboot": {
+	"format": "Reboot",
+	"tooltip": false,
+	"on-click": "reboot"
+    },
+    "custom/hibernate": {
+	"format": "Hibernate",
+	"tooltip": false,
+	"on-click": "systemctl hibernate"
+    },
+    "custom/suspend": {
+	"format": "Suspend",
+	"tooltip": false,
+	"on-click": "systemctl suspend"
+    }
+}

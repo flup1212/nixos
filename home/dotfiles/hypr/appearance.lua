@@ -99,7 +99,7 @@ hl.curve("quick",          { type = "bezier", points = { {0.15, 0},    {0.1, 1} 
 
 -- Default springs
 hl.curve("easy",           { type = "spring", mass = 1, stiffness = 71.2633, dampening = 15.8273644 })
-hl.curve("looseSpring",    { type = "spring", mass = 1, stiffness = 10,     dampening = 4.5         })
+hl.curve("looseSpring",    { type = "spring", mass = 1, stiffness = 100,     dampening = 15.4         })
 
 hl.animation({ leaf = "global",        enabled = true,  speed = 10,   bezier = "default" })
 hl.animation({ leaf = "border",        enabled = true,  speed = 5.39, bezier = "easeOutQuint" })

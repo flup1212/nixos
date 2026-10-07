@@ -8,12 +8,16 @@
 	asunder
 	feishin
 	kdePackages.filelight
+	protonplus
+	vscode
+	retroarch-full
+	steam-rom-manager
     ];
 
     programs = {
 	kitty = {
 	    enable = true;
-	    extraConfig = ''${builtins.readFile ../conf.d/kitty.conf}'';
+	    extraConfig = ''${builtins.readFile ../dotfiles/kitty/kitty.conf}'';
 	};
     };
 }

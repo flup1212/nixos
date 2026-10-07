@@ -1,9 +1,9 @@
 { config, pkgs, ... }: {
     # Define a user account. Don't forget to set a password with ‘passwd’.
-    users.users."levi" = {
+    users.users."user" = {
       isNormalUser = true;
-      description = "Levi Pippel";
-      extraGroups = [ "networkmanager" "wheel" ];
+      description = "Name";
+      extraGroups = [ "networkmanager" "wheel" "input" ];
       packages = with pkgs; [];
       shell = pkgs.fish;
     };

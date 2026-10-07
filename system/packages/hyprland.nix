@@ -1,5 +1,3 @@
 { config, pkgs, ... }: {
-    programs.hyprland = {
-	enable = false;
-    };
+    programs.hyprland.enable = false;
 }
