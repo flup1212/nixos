@@ -12,7 +12,7 @@
     };
 
     outputs = { self, nixpkgs, nixos-hardware, home-manager, ... }@inputs: {
-	nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+	nixosConfigurations.surfacepro8 = nixpkgs.lib.nixosSystem {
 	    modules = [
 		./system/core.nix
 
