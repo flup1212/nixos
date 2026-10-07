@@ -483,6 +483,14 @@ window-rule {
     match is-focused=false
     opacity 0.8
 }
+window-rule {
+    match app-id="vivaldi"
+    scroll-factor 0.07
+}
+window-rule {
+    match app-id="steam"
+    scroll-factor 0.15
+}
 
 // Open the Firefox picture-in-picture player as floating by default.
 window-rule {
