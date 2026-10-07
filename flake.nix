@@ -15,6 +15,8 @@
 	nixosConfigurations.surfacepro8 = nixpkgs.lib.nixosSystem {
 	    modules = [
 		./system/core.nix
+		# use linux-surface kernel
+		nixos-hardware.nixosModules.microsoft-surface-common
 
 		home-manager.nixosModules.default
 		{

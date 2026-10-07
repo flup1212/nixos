@@ -61,6 +61,16 @@ input {
         // middle-emulation
     }
 
+    tablet {
+        map-to-output "eDP-1"
+    }
+
+    touch {
+        // off
+        map-to-output "eDP-1"
+        // calibration-matrix 1.0 0.0 0.0 0.0 1.0 0.0
+    }
+
     // Uncomment this to make the mouse warp to the center of newly focused windows.
     warp-mouse-to-focus
 
@@ -69,13 +79,94 @@ input {
     focus-follows-mouse max-scroll-amount="25%"
 }
 
+// --------------
+// 
+//    Gestures
+//
+// --------------
+
+gestures {
+    // Dots that follow the fingers on screen (demos, debugging).
+    // "gestures": only while a multi-finger gesture is down. "all": every
+    // finger. Remove the line to disable.
+    show-touch-points "all"
+
+    // Per-event gesture logging for bug reports ("gesture-debug:" lines,
+    // info level, applies live from the next touch). Uncomment to enable.
+    // debug-log
+
+    // Multi-finger gestures: the two animated drags, taps, flicks, hold-swipes.
+    touchscreen-swipe {
+        // Base finger count for everything in this block that has no "more"
+        // in its name (the drags and `tap`): 3 or 4. The *-more nodes below
+        // override their gesture at one finger more than this (4 by default).
+        fingers 3
+
+        // What the horizontal drag does: "resize-column" widens/narrows the
+        // focused window, tracking the fingers 1:1; the default "move-view"
+        // scrolls the view across columns instead.
+        horizontal-swipe "resize-column"
+
+        // The discrete gestures (taps, flicks) fire once, on finger lift.
+        tap             { maximize-column; }                    // maximize / restore
+        tap-more        { spawn-sh "~/.local/bin/niri-osk.sh"; }                    // niri's own overview
+        swipe-more-down { close-window; }
+        swipe-more-up   { fullscreen-window; }                  // fullscreen on/off
+
+        // Extra-finger horizontal flicks, unbound by default: uncommented
+        // they leave those flicks on the horizontal drag above (resize or
+        // move-view). Examples:
+        // swipe-more-left { focus-column-left; }
+        // swipe-more-right { focus-column-right; }
+
+        // Prefer an app launcher on the extra-finger tap? Comment out the
+        // toggle-overview line above and uncomment ONE of these (or write
+        // your own spawn):
+        // tap-more { spawn-sh "noctalia msg panel-toggle launcher"; }  // Noctalia
+        // tap-more { spawn "fuzzel"; }                                 // fuzzel
+        // tap-more { spawn "wofi" "--show" "drun"; }                   // wofi
+        // tap-more { spawn "rofi" "-show" "drun"; }                    // rofi
+
+        // Press, hold ~400ms, then swipe: moves the focused window (left or
+        // right a column, up or down a workspace) instead of the animated
+        // drag. Quick swipes never trigger it.
+        hold {
+            left { move-column-left; }
+            right { move-column-right; }
+            up { move-window-to-workspace-up; }
+            down { move-window-to-workspace-down; }
+        }
+    }
+
+    // One finger swiping inward from a screen edge. Taps and short drags in
+    // the strip still reach apps. Don't bind an edge covered by a
+    // swipe-driven panel (e.g. a notification pull-down): it would fire
+    // mid-drag.
+    touchscreen-edge-swipe {
+        bottom { spawn-sh "pkill wofi || wofi --show drun"; }
+        top { toggle-overview; }
+        left { focus-column-left; }
+        right { focus-column-right; }
+    }
+
+    // One finger swiping diagonally inward from a corner. Mostly straight
+    // swipes near a corner do nothing on purpose, so the edges stay usable.
+    // Unbound by default: uncomment to bind a corner.
+    // touchscreen-corner-swipe {
+    //     top-left { maximize-column; }
+    //     top-right { toggle-overview; }
+    //     bottom-left { spawn "foot"; }
+    //     bottom-right { close-window; }
+    // }
+}
+
 // -------------
 // 
 //    Outputs
 //
 // -------------
 
-output "DP-3" {
+output "eDP-1" {
     // Uncomment this line to disable this output.
     // off
 
@@ -85,11 +176,10 @@ output "DP-3" {
     // for the resolution.
     // If the mode is omitted altogether or is invalid, niri will pick one automatically.
     // Run `niri msg outputs` while inside a niri instance to list all outputs and their modes.
-    mode "1920x1080@165.003"
-    focus-at-startup
+    mode "2880x1920@120.000"
 
     // You can use integer or fractional scale, for example use 1.5 for 150% scale.
-    scale 0.9
+    scale 2
 
     // Transform allows to rotate the output counter-clockwise, valid values are:
     // normal, 90, 180, 270, flipped, flipped-90, flipped-180 and flipped-270.
@@ -105,12 +195,6 @@ output "DP-3" {
     // If the position is unset or results in an overlap, the output is instead placed
     // automatically.
     position x=0 y=0
-}
-output "HDMI-A-1" {
-    mode "1920x1080@74.973"
-    scale 0.9
-    transform "normal"
-    position x=2133 y=0
 }
 
 // ------------

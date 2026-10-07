@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, nixos-hardware, ... }: {
     # Use the systemd-boot EFI boot loader.
     boot.loader = {
 	systemd-boot.enable = false;
@@ -13,7 +13,4 @@
 
     # Use latest kernel.
     # boot.kernelPackages = pkgs.linuxPackages_latest; # commented because im using the ms surface kernel
-
-    # Use linux-surface kernel
-    nixos-hardware.nixosModules.microsoft-surface-common
 }
