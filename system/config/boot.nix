@@ -5,7 +5,7 @@
 	efi.canTouchEfiVariables = true;
 	limine = {
 	    enable = true;
-	    style.wallpapers = [ "/home/levi/.config/nixos/wallpaper.png" ];
+	    style.wallpapers = [ "/home/levi/.config/nixos/home/dotfiles/assets/wallpapers/wallpaper.png" ];
 	    style.graphicalTerminal.background = "ffffffff";
 	    maxGenerations = 5;
 	    

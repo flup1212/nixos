@@ -286,7 +286,7 @@ layout {
 // --------------------------
 
 spawn-at-startup "awww-daemon"
-spawn-sh-at-startup "awww img /home/levi/dotfiles/assets/wallpapers/blurred-wallpaper.png"
+spawn-sh-at-startup "awww img /home/levi/.config/nixos/home/dotfiles/assets/wallpapers/blurred-wallpaper.png"
 spawn-sh-at-startup "linux-wallpaperengine --screen-root DP-3 --set-property interloper=0 --silent 2984500160"
 spawn-sh-at-startup "linux-wallpaperengine --screen-root HDMI-A-1 --set-property interloper=0 --silent 2984500160"
 spawn-at-startup "waybar"
