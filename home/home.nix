@@ -4,6 +4,12 @@
     ];
 
     # home config
+    programs.git = {
+	enable = true;
+	settings.user.name = "Levi";
+	settings.user.email = "l.pippel8@gmail.com";
+    };
+
     dconf.settings = {
 	"org/gnome/desktop/interface" = {
 	    color-scheme = "prefer-dark";
@@ -40,5 +46,4 @@
     
     home.stateVersion = "26.05";
     programs.home-manager.enable = true;
-    programs.git.enable = true;
 }
