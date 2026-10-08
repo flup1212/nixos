@@ -4,6 +4,7 @@
 	   notonoto    
 	   font-awesome
 	   nerd-fonts.jetbrains-mono
+	   nerd-fonts.space-mono
 	];
 
 	fontconfig = {

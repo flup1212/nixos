@@ -89,7 +89,7 @@ output "DP-3" {
     focus-at-startup
 
     // You can use integer or fractional scale, for example use 1.5 for 150% scale.
-    scale 0.9
+    scale 1
 
     // Transform allows to rotate the output counter-clockwise, valid values are:
     // normal, 90, 180, 270, flipped, flipped-90, flipped-180 and flipped-270.
@@ -108,9 +108,9 @@ output "DP-3" {
 }
 output "HDMI-A-1" {
     mode "1920x1080@74.973"
-    scale 0.9
+    scale 1
     transform "normal"
-    position x=2133 y=0
+    position x=1920 y=0
 }
 
 // ------------

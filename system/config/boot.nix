@@ -19,7 +19,7 @@
     };
 
     # Use latest kernel.
-    boot.kernelPackages = pkgs.linuxPackages_latest; # commented because im using the ms surface kernel
+    boot.kernelPackages = pkgs.linuxPackages_latest;
 
     # Use linux-surface kernel
     # nixos-hardware.nixosModules.microsoft-surface-common
