@@ -9,7 +9,12 @@
 	home-manager.inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    outputs = { self, nixpkgs, nixos-hardware, home-manager, ... }@inputs: {
+    outputs = { self, nixpkgs, nixos-hardware, home-manager, ... }@inputs:
+    let
+	host = "surfacepro8";
+	username = "levi";
+    in
+    {
 	nixosConfigurations.surfacepro8 = nixpkgs.lib.nixosSystem {
 	    modules = [
 		./system/core.nix
