@@ -9,6 +9,7 @@
 	feishin
 	kdePackages.filelight
 	protonplus
+	proton-vpn
 	vscode
 	retroarch-full
 	steam-rom-manager
