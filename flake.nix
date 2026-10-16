@@ -15,7 +15,11 @@
 	username = "levi";
     in
     {
-	nixosConfigurations.surfacepro8 = nixpkgs.lib.nixosSystem {
+	modules = [
+
+	];
+
+	nixosConfigurations.${host} = nixpkgs.lib.nixosSystem {
 	    modules = [
 		./system/core.nix
 		# use linux-surface kernel
@@ -27,7 +31,7 @@
 			useGlobalPkgs = true;
 			useUserPackages = true;
 			extraSpecialArgs = { inherit inputs; };
-              	    	users.levi = ./home/home.nix;
+              	    	users.${username} = ./home/${username}/home.nix;
 		    };
 		}
 	    ];
