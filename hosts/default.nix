@@ -1,5 +1,6 @@
-{ pkgs }: {
-    nixosConfigurations.${host} = nixpkgs.lib.nixosSystem {
-
-    }l
+{ host }: {
+    imports = [
+	./common
+	./${host}
+    ];
 }

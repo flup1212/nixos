@@ -11,14 +11,10 @@
 
     outputs = { self, nixpkgs, nixos-hardware, home-manager, ... }@inputs:
     let
-	host = "surfacepro8";
-	username = "levi";
+	host = "nixos";
+	user = "levi";
     in
     {
-	modules = [
-
-	];
-
 	nixosConfigurations.${host} = nixpkgs.lib.nixosSystem {
 	    modules = [
 		./system/core.nix
