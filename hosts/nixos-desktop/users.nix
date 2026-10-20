@@ -1,0 +1,20 @@
+{ config, pkgs, host, ... }: {
+    # Define a user account. Don't forget to set a password with ‘passwd’.
+    users.users."levi" = {
+      isNormalUser = true;
+      description = "Levi Pippel";
+      extraGroups = [ "networkmanager" "wheel" "input" ];
+      packages = with pkgs; [];
+      shell = pkgs.fish;
+    };
+
+    home-manager.nixosModules.default
+    {
+	home-manager = {
+	    useGlobalPkgs = true;
+	    useUserPackages = true;
+	    extraSpecialArgs = { inherit inputs; };
+	    users.${user} = ../../../home/${user}/home.nix;
+	};
+    }
+}

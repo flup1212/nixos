@@ -2,17 +2,9 @@
     imports = [
 	./boot.nix
 	./general.nix
+	./users.nix
+	./commonpkgs.nix
     ];
-
-    home-manager.nixosModules.default
-    {
-	home-manager = {
-	    useGlobalPkgs = true;
-	    useUserPackages = true;
-	    extraSpecialArgs = { inherit inputs; };
-	    users.${user} = ../../../home/${user}/home.nix;
-	};
-    }
 
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
     # This option defines the first version of NixOS you have installed on this particular machine,

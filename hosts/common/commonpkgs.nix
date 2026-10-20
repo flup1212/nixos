@@ -12,7 +12,6 @@
 	wine
     ];
 
-
     programs = {
 	fish.enable = true;
 
@@ -20,6 +19,22 @@
 	    enable = true;
 	    remotePlay.openFirewall = true;
 	    dedicatedServer.openFirewall = true;
+	};
+
+	hyprland.enable = false;
+	niri.enable = true;
+    };
+    fonts = {
+	packages = with pkgs; [
+	    notonoto    
+	    font-awesome
+	    nerd-fonts.jetbrains-mono
+	];
+
+	fontconfig = {
+	    defaultFonts = {
+		serif = [ "Space Mono" ];
+	    };
 	};
     };
     services = {

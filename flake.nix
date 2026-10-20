@@ -20,16 +20,6 @@
 		./system/core.nix
 		# use linux-surface kernel
 		nixos-hardware.nixosModules.microsoft-surface-common
-
-		home-manager.nixosModules.default
-		{
-		    home-manager = {
-			useGlobalPkgs = true;
-			useUserPackages = true;
-			extraSpecialArgs = { inherit inputs; };
-              	    	users.${username} = ./home/${username}/home.nix;
-		    };
-		}
 	    ];
 	};
     };
