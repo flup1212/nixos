@@ -33,6 +33,9 @@ in
 	wine
     ];
 
+
+    virtualisation.virtualbox.host.enable = true;
+    users.extraGroups.vboxusers.members = [ "levi" ];
     programs = {
 	fish.enable = true;
 	# iri.package = niri-tablet;

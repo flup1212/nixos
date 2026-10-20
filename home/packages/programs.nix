@@ -13,7 +13,6 @@
 	vscode
 	retroarch-full
 	steam-rom-manager
-	virtualbox
     ];
 
     programs = {
