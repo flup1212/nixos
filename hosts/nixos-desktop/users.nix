@@ -1,4 +1,8 @@
-{ config, pkgs, host, ... }: {
+{ config, pkgs, host, home-manager, ... }@inputs:
+let 
+    user = "levi";
+in
+{
     # Define a user account. Don't forget to set a password with ‘passwd’.
     users.users."levi" = {
       isNormalUser = true;
@@ -8,13 +12,15 @@
       shell = pkgs.fish;
     };
 
-    home-manager.nixosModules.default
-    {
-	home-manager = {
-	    useGlobalPkgs = true;
-	    useUserPackages = true;
-	    extraSpecialArgs = { inherit inputs; };
-	    users.${user} = ../../../home/${user}/home.nix;
-	};
-    }
+    imports = [
+	home-manager.nixosModules.default
+    	{
+    	    home-manager = {
+    	        useGlobalPkgs = true;
+    	        useUserPackages = true;
+    	        extraSpecialArgs = { inherit inputs; };
+    	        users.${user} = ../../home/${user}/home.nix;
+    	    };
+    	}
+    ];
 }

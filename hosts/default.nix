@@ -1,6 +1,0 @@
-{ host }: {
-    imports = [
-	./common
-	./${host}
-    ];
-}

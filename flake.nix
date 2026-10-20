@@ -9,18 +9,13 @@
 	home-manager.inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    outputs = { self, nixpkgs, nixos-hardware, home-manager, ... }@inputs:
-    let
-	host = "nixos";
-	user = "levi";
-    in
-    {
-	nixosConfigurations.${host} = nixpkgs.lib.nixosSystem {
-	    modules = [
-		./system/core.nix
-		# use linux-surface kernel
-		nixos-hardware.nixosModules.microsoft-surface-common
-	    ];
+    outputs = { self, nixpkgs, nixos-hardware, home-manager, ... }@inputs: {
+	nixosConfigurations = {
+	    nixos-desktop = nixpkgs.lib.nixosSystem {
+		modules = [
+		    ./hosts/nixos-desktop
+	        ];
+	    };
 	};
     };
 }
